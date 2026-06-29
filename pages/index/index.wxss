@@ -1,0 +1,182 @@
+.season-card {
+  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  color: #fff;
+}
+
+.season-card .card-title { display: none; }
+
+.season-header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16rpx;
+  margin-bottom: 8rpx;
+}
+
+.player-name {
+  font-size: 40rpx;
+  font-weight: 700;
+}
+
+.team-tag {
+  font-size: 24rpx;
+  background: rgba(231,76,60,0.3);
+  color: #f39c12;
+  padding: 4rpx 16rpx;
+  border-radius: 8rpx;
+}
+
+.season-subtitle {
+  text-align: center;
+  font-size: 26rpx;
+  color: rgba(255,255,255,0.6);
+  margin-bottom: 28rpx;
+}
+
+.stats-grid {
+  display: flex;
+  justify-content: space-around;
+  margin-bottom: 24rpx;
+  padding-bottom: 20rpx;
+  border-bottom: 1rpx solid rgba(255,255,255,0.1);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-value {
+  display: block;
+  font-size: 40rpx;
+  font-weight: 700;
+}
+
+.stat-value.highlight { color: #e74c3c; }
+.stat-value.kda { color: #3498db; }
+.stat-value.accent { color: #f39c12; }
+
+.stat-label {
+  font-size: 22rpx;
+  color: rgba(255,255,255,0.5);
+  margin-top: 4rpx;
+}
+
+.sub-stats {
+  display: flex;
+  justify-content: space-around;
+}
+
+.sub-stat {
+  text-align: center;
+}
+
+.sub-stat-val {
+  display: block;
+  font-size: 28rpx;
+  font-weight: 600;
+  color: #f39c12;
+}
+
+.sub-stat-label {
+  font-size: 20rpx;
+  color: rgba(255,255,255,0.4);
+}
+
+.hero-list {
+  margin-top: 4rpx;
+}
+
+.hero-item {
+  display: flex;
+  align-items: center;
+  padding: 16rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.hero-item:last-child {
+  border-bottom: none;
+}
+
+.hero-rank {
+  width: 40rpx;
+  height: 40rpx;
+  line-height: 40rpx;
+  text-align: center;
+  background: #f0f0f0;
+  border-radius: 8rpx;
+  font-size: 24rpx;
+  color: #999;
+  margin-right: 16rpx;
+}
+
+.hero-item:first-child .hero-rank { background: #e74c3c; color: #fff; }
+.hero-item:nth-child(2) .hero-rank { background: #f39c12; color: #fff; }
+.hero-item:nth-child(3) .hero-rank { background: #3498db; color: #fff; }
+
+.hero-name {
+  flex: 1;
+  font-size: 28rpx;
+  font-weight: 500;
+}
+
+.hero-battles {
+  font-size: 24rpx;
+  color: #999;
+  margin-right: 16rpx;
+}
+
+.hero-winrate {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.hero-winrate.win-high { color: #e74c3c; }
+.hero-winrate.win-mid { color: #f39c12; }
+.hero-winrate.win-low { color: #999; }
+
+.card-footer {
+  text-align: center;
+  color: #3498db;
+  font-size: 26rpx;
+  margin-top: 16rpx;
+  padding-top: 12rpx;
+  border-top: 1rpx solid #f0f0f0;
+}
+
+.live-card {
+  background: linear-gradient(135deg, #2c3e50, #34495e);
+  color: #fff;
+}
+
+.live-card .card-title::before {
+  background: #f39c12;
+}
+
+.live-stats {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 8rpx;
+}
+
+.live-stat {
+  text-align: center;
+}
+
+.live-stat-val {
+  display: block;
+  font-size: 36rpx;
+  font-weight: 700;
+  color: #f39c12;
+}
+
+.live-stat-label {
+  font-size: 22rpx;
+  color: rgba(255,255,255,0.5);
+}
+
+.live-placeholder {
+  text-align: center;
+  padding: 30rpx 0;
+  color: rgba(255,255,255,0.4);
+  font-size: 26rpx;
+}

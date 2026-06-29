@@ -1,0 +1,22 @@
+<view class="container">
+  <view wx:if="{{loading}}" class="empty-state">加载中...</view>
+
+  <view wx:else>
+    <view class="card">
+      <view class="card-title">英雄池排行</view>
+      <view class="hero-item" wx:for="{{heroes}}" wx:key="name">
+        <view class="hero-rank">{{item.rank}}</view>
+        <view class="hero-info">
+          <text class="hero-name">{{item.name}}</text>
+          <view class="hero-bar-wrap">
+            <view class="hero-bar" style="width: {{item.barWidth}}%"></view>
+          </view>
+        </view>
+        <view class="hero-meta">
+          <text class="hero-battles">{{item.battles}}场</text>
+          <text class="hero-winrate {{item.winRateClass}}">{{item.winRate}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>

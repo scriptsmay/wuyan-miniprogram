@@ -1,0 +1,98 @@
+<view class="container">
+  <!-- 加载状态 -->
+  <view wx:if="{{loading}}" class="empty-state">加载中...</view>
+
+  <!-- 错误状态 -->
+  <view wx:elif="{{error}}" class="empty-state">{{error}}</view>
+
+  <!-- 数据展示 -->
+  <view wx:else>
+    <!-- 赛季概览卡片 -->
+    <view class="card season-card">
+      <view class="season-header">
+        <text class="player-name">{{playerName}}</text>
+        <text class="team-tag">{{teamName}}</text>
+      </view>
+      <view class="season-subtitle">{{seasonName}}</view>
+
+      <view class="stats-grid">
+        <view class="stat-item">
+          <text class="stat-value highlight">{{winRate}}</text>
+          <text class="stat-label">胜率</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value kda">{{kda}}</text>
+          <text class="stat-label">KDA</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value">{{totalGames}}</text>
+          <text class="stat-label">总场次</text>
+        </view>
+        <view class="stat-item">
+          <text class="stat-value accent">{{mvpCount}}</text>
+          <text class="stat-label">MVP</text>
+        </view>
+      </view>
+
+      <!-- 本赛季数据 -->
+      <view class="sub-stats">
+        <view class="sub-stat">
+          <text class="sub-stat-val">{{seasonStats.wins}}</text>
+          <text class="sub-stat-label">胜</text>
+        </view>
+        <view class="sub-stat">
+          <text class="sub-stat-val">{{seasonStats.loses}}</text>
+          <text class="sub-stat-label">负</text>
+        </view>
+        <view class="sub-stat">
+          <text class="sub-stat-val">{{seasonStats.kills}}</text>
+          <text class="sub-stat-label">场均击杀</text>
+        </view>
+        <view class="sub-stat">
+          <text class="sub-stat-val">{{seasonStats.deaths}}</text>
+          <text class="sub-stat-label">场均死亡</text>
+        </view>
+        <view class="sub-stat">
+          <text class="sub-stat-val">{{seasonStats.assists}}</text>
+          <text class="sub-stat-label">场均助攻</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 英雄池卡片 -->
+    <view class="card">
+      <view class="card-title">英雄池</view>
+      <view class="hero-list">
+        <view class="hero-item" wx:for="{{heroPool}}" wx:key="name">
+          <text class="hero-rank">{{index + 1}}</text>
+          <text class="hero-name">{{item.name}}</text>
+          <text class="hero-battles">{{item.battles}}场</text>
+          <text class="hero-winrate {{item.winRateClass}}">{{item.winRate}}</text>
+        </view>
+      </view>
+      <view class="card-footer" wx:if="{{heroPool.length > 0}}" bindtap="goHeroes">查看完整英雄池 →</view>
+    </view>
+
+    <!-- 直播预告入口 -->
+    <view class="card live-card" bindtap="goCalendar">
+      <view class="card-title">直播日历</view>
+      <view wx:if="{{liveSummary.loaded}}">
+        <view class="live-stats">
+          <view class="live-stat">
+            <text class="live-stat-val">{{liveSummary.days}}</text>
+            <text class="live-stat-label">天</text>
+          </view>
+          <view class="live-stat">
+            <text class="live-stat-val">{{liveSummary.sessions}}</text>
+            <text class="live-stat-label">场</text>
+          </view>
+          <view class="live-stat">
+            <text class="live-stat-val">{{liveSummary.hours}}h</text>
+            <text class="live-stat-label">总时长</text>
+          </view>
+        </view>
+      </view>
+      <view wx:else class="live-placeholder">暂无直播数据</view>
+    </view>
+  </view>
+</view>

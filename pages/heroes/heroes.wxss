@@ -1,0 +1,74 @@
+.hero-item {
+  display: flex;
+  align-items: center;
+  padding: 20rpx 0;
+  border-bottom: 1rpx solid #f0f0f0;
+}
+
+.hero-item:last-child {
+  border-bottom: none;
+}
+
+.hero-rank {
+  width: 48rpx;
+  height: 48rpx;
+  line-height: 48rpx;
+  text-align: center;
+  background: #f0f0f0;
+  border-radius: 10rpx;
+  font-size: 24rpx;
+  color: #999;
+  font-weight: 600;
+  margin-right: 20rpx;
+  flex-shrink: 0;
+}
+
+.hero-item:first-child .hero-rank { background: #e74c3c; color: #fff; }
+.hero-item:nth-child(2) .hero-rank { background: #f39c12; color: #fff; }
+.hero-item:nth-child(3) .hero-rank { background: #3498db; color: #fff; }
+
+.hero-info {
+  flex: 1;
+}
+
+.hero-name {
+  font-size: 28rpx;
+  font-weight: 500;
+  display: block;
+  margin-bottom: 8rpx;
+}
+
+.hero-bar-wrap {
+  height: 8rpx;
+  background: #f0f0f0;
+  border-radius: 4rpx;
+  overflow: hidden;
+}
+
+.hero-bar {
+  height: 100%;
+  background: linear-gradient(90deg, #e74c3c, #f39c12);
+  border-radius: 4rpx;
+  transition: width 0.3s;
+}
+
+.hero-meta {
+  text-align: right;
+  margin-left: 20rpx;
+  flex-shrink: 0;
+}
+
+.hero-battles {
+  display: block;
+  font-size: 24rpx;
+  color: #999;
+}
+
+.hero-winrate {
+  font-size: 28rpx;
+  font-weight: 600;
+}
+
+.hero-winrate.win-high { color: #e74c3c; }
+.hero-winrate.win-mid { color: #f39c12; }
+.hero-winrate.win-low { color: #999; }

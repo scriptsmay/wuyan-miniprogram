@@ -1,0 +1,49 @@
+<view class="container">
+  <!-- 加载中 -->
+  <view wx:if="{{loading}}" class="empty-state">加载中...</view>
+
+  <!-- 无数据 -->
+  <view wx:elif="{{empty}}" class="empty-state">本月暂无直播数据</view>
+
+  <!-- 直播数据 -->
+  <view wx:else>
+    <!-- 月度统计卡片 -->
+    <view class="card summary-card">
+      <view class="month-title">{{currentMonth}} 直播概览</view>
+      <view class="summary-grid">
+        <view class="summary-item">
+          <text class="summary-val">{{summary.days}}</text>
+          <text class="summary-label">直播天数</text>
+        </view>
+        <view class="summary-item">
+          <text class="summary-val">{{summary.sessions}}</text>
+          <text class="summary-label">总场次</text>
+        </view>
+        <view class="summary-item">
+          <text class="summary-val">{{summary.hours}}h</text>
+          <text class="summary-label">总时长</text>
+        </view>
+        <view class="summary-item">
+          <text class="summary-val">{{summary.avgHours}}h</text>
+          <text class="summary-label">场均时长</text>
+        </view>
+      </view>
+    </view>
+
+    <!-- 直播列表 -->
+    <view class="card">
+      <view class="card-title">直播记录</view>
+      <view class="stream-list">
+        <view class="stream-item" wx:for="{{streams}}" wx:key="_id">
+          <view class="stream-left">
+            <text class="stream-date">{{item.dateDisplay}}</text>
+            <text class="stream-time">{{item.startTime}}</text>
+          </view>
+          <view class="stream-right">
+            <text class="stream-duration">{{item.durationDisplay}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
