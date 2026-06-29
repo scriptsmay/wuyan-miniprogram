@@ -1,5 +1,6 @@
 .season-card {
-  background: linear-gradient(135deg, #1a1a2e, #16213e);
+  background: linear-gradient(135deg, #0a0e1a, #1a2a3a);
+  border-color: rgba(0, 212, 255, 0.1);
   color: #fff;
 }
 
@@ -16,12 +17,13 @@
 .player-name {
   font-size: 40rpx;
   font-weight: 700;
+  color: #fff;
 }
 
 .team-tag {
   font-size: 24rpx;
-  background: rgba(231,76,60,0.3);
-  color: #f39c12;
+  background: rgba(0, 212, 255, 0.15);
+  color: var(--secondary);
   padding: 4rpx 16rpx;
   border-radius: 8rpx;
 }
@@ -29,7 +31,7 @@
 .season-subtitle {
   text-align: center;
   font-size: 26rpx;
-  color: rgba(255,255,255,0.6);
+  color: var(--text-muted);
   margin-bottom: 28rpx;
 }
 
@@ -38,7 +40,7 @@
   justify-content: space-around;
   margin-bottom: 24rpx;
   padding-bottom: 20rpx;
-  border-bottom: 1rpx solid rgba(255,255,255,0.1);
+  border-bottom: 1rpx solid rgba(255,255,255,0.08);
 }
 
 .stat-item {
@@ -49,15 +51,16 @@
   display: block;
   font-size: 40rpx;
   font-weight: 700;
+  color: var(--text);
 }
 
-.stat-value.highlight { color: #e74c3c; }
-.stat-value.kda { color: #3498db; }
-.stat-value.accent { color: #f39c12; }
+.stat-value.highlight { color: var(--primary); }
+.stat-value.kda { color: var(--primary); }
+.stat-value.accent { color: var(--secondary); }
 
 .stat-label {
   font-size: 22rpx;
-  color: rgba(255,255,255,0.5);
+  color: var(--text-muted);
   margin-top: 4rpx;
 }
 
@@ -74,12 +77,12 @@
   display: block;
   font-size: 28rpx;
   font-weight: 600;
-  color: #f39c12;
+  color: var(--secondary);
 }
 
 .sub-stat-label {
   font-size: 20rpx;
-  color: rgba(255,255,255,0.4);
+  color: var(--text-muted);
 }
 
 .hero-list {
@@ -90,7 +93,7 @@
   display: flex;
   align-items: center;
   padding: 16rpx 0;
-  border-bottom: 1rpx solid #f0f0f0;
+  border-bottom: 1rpx solid var(--border);
 }
 
 .hero-item:last-child {
@@ -102,26 +105,27 @@
   height: 40rpx;
   line-height: 40rpx;
   text-align: center;
-  background: #f0f0f0;
+  background: var(--card-elevated);
   border-radius: 8rpx;
   font-size: 24rpx;
-  color: #999;
+  color: var(--text-muted);
   margin-right: 16rpx;
 }
 
-.hero-item:first-child .hero-rank { background: #e74c3c; color: #fff; }
-.hero-item:nth-child(2) .hero-rank { background: #f39c12; color: #fff; }
-.hero-item:nth-child(3) .hero-rank { background: #3498db; color: #fff; }
+.hero-item:first-child .hero-rank { background: var(--primary); color: #0a0e1a; }
+.hero-item:nth-child(2) .hero-rank { background: var(--secondary); color: #fff; }
+.hero-item:nth-child(3) .hero-rank { background: #0099cc; color: #fff; }
 
 .hero-name {
   flex: 1;
   font-size: 28rpx;
   font-weight: 500;
+  color: var(--text-secondary);
 }
 
 .hero-battles {
   font-size: 24rpx;
-  color: #999;
+  color: var(--text-muted);
   margin-right: 16rpx;
 }
 
@@ -130,21 +134,22 @@
   font-weight: 600;
 }
 
-.hero-winrate.win-high { color: #e74c3c; }
-.hero-winrate.win-mid { color: #f39c12; }
-.hero-winrate.win-low { color: #999; }
+.hero-winrate.win-high { color: var(--primary); }
+.hero-winrate.win-mid { color: var(--secondary); }
+.hero-winrate.win-low { color: var(--text-muted); }
 
 .card-footer {
   text-align: center;
-  color: #3498db;
+  color: var(--primary);
   font-size: 26rpx;
   margin-top: 16rpx;
   padding-top: 12rpx;
-  border-top: 1rpx solid #f0f0f0;
+  border-top: 1rpx solid var(--border);
 }
 
 .live-card {
-  background: linear-gradient(135deg, #2c3e50, #34495e);
+  background: linear-gradient(135deg, #11151f, #1a1f2a);
+  border-color: rgba(0, 212, 255, 0.12);
   color: #fff;
 }
 
@@ -162,7 +167,7 @@
   display: inline-block;
   width: 6rpx;
   height: 28rpx;
-  background: #f39c12;
+  background: var(--secondary);
   border-radius: 3rpx;
   margin-right: 12rpx;
 }
@@ -181,17 +186,17 @@
   display: block;
   font-size: 36rpx;
   font-weight: 700;
-  color: #f39c12;
+  color: var(--primary);
 }
 
 .live-stat-label {
   font-size: 22rpx;
-  color: rgba(255,255,255,0.5);
+  color: var(--text-muted);
 }
 
 .live-placeholder {
   text-align: center;
   padding: 30rpx 0;
-  color: rgba(255,255,255,0.4);
+  color: var(--text-muted);
   font-size: 26rpx;
 }

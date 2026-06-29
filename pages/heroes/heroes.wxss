@@ -2,7 +2,7 @@
   display: flex;
   align-items: center;
   padding: 20rpx 0;
-  border-bottom: 1rpx solid #f0f0f0;
+  border-bottom: 1rpx solid var(--border);
 }
 
 .hero-item:last-child {
@@ -14,18 +14,18 @@
   height: 48rpx;
   line-height: 48rpx;
   text-align: center;
-  background: #f0f0f0;
+  background: var(--card-elevated);
   border-radius: 10rpx;
   font-size: 24rpx;
-  color: #999;
+  color: var(--text-muted);
   font-weight: 600;
   margin-right: 20rpx;
   flex-shrink: 0;
 }
 
-.hero-item:first-child .hero-rank { background: #e74c3c; color: #fff; }
-.hero-item:nth-child(2) .hero-rank { background: #f39c12; color: #fff; }
-.hero-item:nth-child(3) .hero-rank { background: #3498db; color: #fff; }
+.hero-item:first-child .hero-rank { background: var(--primary); color: #0a0e1a; }
+.hero-item:nth-child(2) .hero-rank { background: var(--secondary); color: #fff; }
+.hero-item:nth-child(3) .hero-rank { background: #0099cc; color: #fff; }
 
 .hero-info {
   flex: 1;
@@ -34,20 +34,21 @@
 .hero-name {
   font-size: 28rpx;
   font-weight: 500;
+  color: var(--text-secondary);
   display: block;
   margin-bottom: 8rpx;
 }
 
 .hero-bar-wrap {
   height: 8rpx;
-  background: #f0f0f0;
+  background: var(--card-elevated);
   border-radius: 4rpx;
   overflow: hidden;
 }
 
 .hero-bar {
   height: 100%;
-  background: linear-gradient(90deg, #e74c3c, #f39c12);
+  background: linear-gradient(90deg, var(--primary), var(--secondary));
   border-radius: 4rpx;
   transition: width 0.3s;
 }
@@ -61,7 +62,7 @@
 .hero-battles {
   display: block;
   font-size: 24rpx;
-  color: #999;
+  color: var(--text-muted);
 }
 
 .hero-winrate {
@@ -69,6 +70,6 @@
   font-weight: 600;
 }
 
-.hero-winrate.win-high { color: #e74c3c; }
-.hero-winrate.win-mid { color: #f39c12; }
-.hero-winrate.win-low { color: #999; }
+.hero-winrate.win-high { color: var(--primary); }
+.hero-winrate.win-mid { color: var(--secondary); }
+.hero-winrate.win-low { color: var(--text-muted); }

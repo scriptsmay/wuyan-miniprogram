@@ -14,19 +14,19 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: #fff;
-  box-shadow: 0 2rpx 8rpx rgba(0,0,0,0.08);
+  background: var(--card);
+  border: 1rpx solid var(--border);
   transition: all 0.15s;
 }
 
 .nav-btn:active {
-  background: #f0f0f0;
+  background: var(--card-elevated);
   transform: scale(0.94);
 }
 
 .nav-arrow {
   font-size: 28rpx;
-  color: #e74c3c;
+  color: var(--primary);
 }
 
 .nav-btn-placeholder {
@@ -37,19 +37,20 @@
 .nav-title {
   font-size: 34rpx;
   font-weight: 700;
+  color: var(--text);
   min-width: 200rpx;
   text-align: center;
 }
 
 .nav-loading {
   font-size: 28rpx;
-  color: #999;
+  color: var(--text-muted);
   font-weight: 400;
 }
 
 .summary-card {
-  background: linear-gradient(135deg, #2c3e50, #34495e);
-  color: #fff;
+  background: linear-gradient(135deg, rgba(0,212,255,0.08), rgba(0,212,255,0.02));
+  border-color: rgba(0, 212, 255, 0.15);
 }
 
 .summary-grid {
@@ -65,12 +66,12 @@
   display: block;
   font-size: 36rpx;
   font-weight: 700;
-  color: #f39c12;
+  color: var(--primary);
 }
 
 .summary-label {
   font-size: 22rpx;
-  color: rgba(255,255,255,0.5);
+  color: var(--text-muted);
   margin-top: 4rpx;
 }
 
@@ -83,7 +84,7 @@
   align-items: center;
   justify-content: space-between;
   padding: 20rpx 0;
-  border-bottom: 1rpx solid #f0f0f0;
+  border-bottom: 1rpx solid var(--border);
 }
 
 .stream-item:last-child {
@@ -99,16 +100,17 @@
 .stream-date {
   font-size: 28rpx;
   font-weight: 500;
+  color: var(--text-secondary);
   min-width: 140rpx;
 }
 
 .stream-time {
   font-size: 24rpx;
-  color: #999;
+  color: var(--text-muted);
 }
 
 .stream-duration {
   font-size: 28rpx;
-  color: #f39c12;
+  color: var(--secondary);
   font-weight: 600;
 }
