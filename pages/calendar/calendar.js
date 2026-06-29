@@ -47,37 +47,21 @@ Page({
         })
       }
 
-      // Get stream records for current month
-      const streamsRes = await db.collection('live_streams')
-        .where({ year: year, month: month, type: db.command.neq('monthly_summary').or(db.command.exists(false)) })
+      // Get stream records for current month (type != 'monthly_summary')
+      const allRes = await db.collection('live_streams')
+        .where({ year: year, month: month })
         .orderBy('stream_date', 'desc')
-        .orderBy('start_time', 'desc')
         .get()
 
-      if (streamsRes.data && streamsRes.data.length > 0) {
-        const streams = streamsRes.data.filter(s => s.type !== 'monthly_summary').map(s => ({
-          ...s,
-          dateDisplay: s.stream_date ? s.stream_date.slice(5) : s.stream_date,
-          durationDisplay: this.formatDuration(s.duration || 0)
-        }))
+      if (allRes.data && allRes.data.length > 0) {
+        const streams = allRes.data
+          .filter(s => s.type !== 'monthly_summary')
+          .map(s => ({
+            ...s,
+            dateDisplay: s.stream_date ? s.stream_date.slice(5) : s.stream_date,
+            durationDisplay: this.formatDuration(s.duration || 0)
+          }))
         this.setData({ streams })
-      } else {
-        // Try without type filter
-        const allRes = await db.collection('live_streams')
-          .where({ year: year, month: month })
-          .orderBy('stream_date', 'desc')
-          .get()
-
-        if (allRes.data) {
-          const streams = allRes.data
-            .filter(s => s.type !== 'monthly_summary')
-            .map(s => ({
-              ...s,
-              dateDisplay: s.stream_date ? s.stream_date.slice(5) : s.stream_date,
-              durationDisplay: this.formatDuration(s.duration || 0)
-            }))
-          this.setData({ streams })
-        }
       }
 
       if (!summaryRes.data || summaryRes.data.length === 0) {
