@@ -47,7 +47,6 @@
   "libVersion": "3.3.4",
   "appid": "wx73dbc55fb43bb695",
   "projectname": "wuyan-data",
-  "cloudfunctionRoot": "cloudfunctions/",
   "condition": {},
   "simulatorPluginLibVersion": {},
   "editorSetting": {}

@@ -1,4 +1,6 @@
 {
-  "rules": [],
-  "hint": "根据 sitemap 的规则[0]，当前页面 [pages/index/index] 将被索引"
+  "rules": [{
+    "action": "allow",
+    "page": "*"
+  }]
 }
