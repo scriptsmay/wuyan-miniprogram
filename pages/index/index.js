@@ -24,52 +24,83 @@ Page({
     this.loadData().then(() => wx.stopPullDownRefresh())
   },
 
-  async loadData() {
+  loadData() {
     this.setData({ loading: true, error: '' })
-    try {
-      const db = app.globalData.db
-      if (!db) {
-        this.setData({ error: '云开发未初始化' })
-        return
+
+    const base = app.globalData.funcBase
+    const token = 'wuyan-mini-2026'
+    const now = new Date()
+    const year = now.getFullYear()
+    const month = now.getMonth() + 1
+
+    return new Promise((resolve) => {
+      let overviewDone = false
+      let liveDone = false
+
+      const checkDone = () => {
+        if (overviewDone && liveDone) {
+          this.setData({ loading: false })
+          resolve()
+        }
       }
 
-      const [seasonRes, liveRes] = await Promise.all([
-        db.collection('season_summaries')
-          .orderBy('updated_at', 'desc')
-          .limit(1)
-          .get(),
-        db.collection('live_streams')
-          .where({ type: 'monthly_summary' })
-          .orderBy('updated_at', 'desc')
-          .limit(1)
-          .get()
-      ])
+      wx.request({
+        url: `${base}/api/overview?token=${token}`,
+        method: 'GET',
+        success: (res) => {
+          if (res.statusCode === 200 && res.data.code === 200) {
+            this.buildSeasonData(res.data.data)
+          } else {
+            this.setData({ error: `数据加载失败(${res.statusCode})` })
+          }
+        },
+        fail: (err) => {
+          console.error('概览请求失败:', err)
+          this.setData({ error: '网络请求失败，请检查网络' })
+        },
+        complete: () => {
+          overviewDone = true
+          checkDone()
+        }
+      })
 
-      if (seasonRes.data && seasonRes.data.length > 0) {
-        this.buildSeasonData(seasonRes.data[0])
-      } else {
-        this.setData({ error: '暂无比赛数据' })
-      }
-
-      if (liveRes.data && liveRes.data.length > 0) {
-        this.buildLiveData(liveRes.data[0])
-      }
-    } catch (err) {
-      console.error('加载数据失败:', err)
-      this.setData({ error: '数据加载失败: ' + err.message })
-    } finally {
-      this.setData({ loading: false })
-    }
+      wx.request({
+        url: `${base}/api/live?token=${token}&year=${year}&month=${month}`,
+        method: 'GET',
+        success: (res) => {
+          if (res.statusCode === 200 && res.data.code === 200) {
+            const d = res.data.data
+            const summary = d.summary || {}
+            this.setData({
+              liveSummary: {
+                loaded: true,
+                days: summary.total_days || 0,
+                sessions: summary.total_sessions || 0,
+                hours: summary.total_hours || 0
+              }
+            })
+          } else {
+            this.setData({ liveSummary: { loaded: true, days: 0, sessions: 0, hours: 0 } })
+          }
+        },
+        fail: () => {
+          this.setData({ liveSummary: { loaded: true, days: 0, sessions: 0, hours: 0 } })
+        },
+        complete: () => {
+          liveDone = true
+          checkDone()
+        }
+      })
+    })
   },
 
-  buildSeasonData(doc) {
-    const d = doc.data
+  buildSeasonData(resp) {
+    const d = resp.overview || {}
     const cs = d.current_season || {}
     const heroTop = d.hero_top || []
     const career = d.career_summary || {}
     const info = d.player_info || {}
 
-    const winRateNum = parseFloat(cs.win_rate || '0')
     const heroPool = heroTop.map(h => {
       const rate = parseFloat(h.win_rate || '0')
       let winRateClass = 'win-low'
@@ -86,7 +117,7 @@ Page({
     this.setData({
       playerName: info.latest_nickname || '—',
       teamName: info.latest_team || '—',
-      seasonName: doc.season_name || '—',
+      seasonName: resp.season_name || '—',
       winRate: cs.win_rate || '—',
       kda: cs.kda_ratio || '—',
       totalGames: String(career.total_matches || cs.battles || 0),
@@ -99,17 +130,6 @@ Page({
         assists: cs.avg_assists || 0
       },
       heroPool
-    })
-  },
-
-  buildLiveData(doc) {
-    this.setData({
-      liveSummary: {
-        loaded: true,
-        days: doc.total_days || 0,
-        sessions: doc.total_sessions || 0,
-        hours: doc.total_hours || 0
-      }
     })
   },
 

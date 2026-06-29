@@ -148,6 +148,10 @@
   color: #fff;
 }
 
+.live-card .card-title {
+  color: #fff;
+}
+
 .live-card .card-title::before {
   background: #f39c12;
 }

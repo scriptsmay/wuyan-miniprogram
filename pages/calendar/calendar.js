@@ -4,76 +4,99 @@ Page({
   data: {
     loading: true,
     empty: false,
+    year: 0,
+    month: 0,
     currentMonth: '',
     summary: { days: 0, sessions: 0, hours: 0, avgHours: 0 },
     streams: []
   },
 
   onShow() {
-    this.loadData()
+    const now = new Date()
+    this.loadData(now.getFullYear(), now.getMonth() + 1)
   },
 
   onPullDownRefresh() {
-    this.loadData().then(() => wx.stopPullDownRefresh())
+    this.loadData(this.data.year, this.data.month)
+      .then(() => wx.stopPullDownRefresh())
   },
 
-  async loadData() {
-    this.setData({ loading: true })
-    try {
-      const db = app.globalData.db
-      if (!db) return
+  loadData(year, month) {
+    this.setData({
+      loading: true,
+      year,
+      month,
+      currentMonth: `${year}年${month}月`
+    })
 
-      const now = new Date()
-      const year = now.getFullYear()
-      const month = now.getMonth() + 1
-      const monthLabel = `${year}年${month}月`
-      this.setData({ currentMonth: monthLabel })
+    const base = app.globalData.funcBase
+    const token = 'wuyan-mini-2026'
 
-      // Get monthly summary
-      const monthKey = `${year}-${String(month).padStart(2, '0')}`
-      const summaryRes = await db.collection('live_streams')
-        .where({ type: 'monthly_summary', month_key: monthKey })
-        .get()
+    return new Promise((resolve) => {
+      wx.request({
+        url: `${base}/api/live?token=${token}&year=${year}&month=${month}`,
+        method: 'GET',
+        success: (res) => {
+          if (res.statusCode === 200 && res.data.code === 200) {
+            const d = res.data.data
+            const summary = d.summary
+            const streams = (d.streams || []).map(s => ({
+              ...s,
+              dateDisplay: s.stream_date ? s.stream_date.slice(5) : s.stream_date,
+              startTime: s.start_time || '',
+              durationDisplay: this.formatDuration(s.duration || 0)
+            }))
 
-      if (summaryRes.data && summaryRes.data.length > 0) {
-        const s = summaryRes.data[0]
-        this.setData({
-          summary: {
-            days: s.total_days,
-            sessions: s.total_sessions,
-            hours: s.total_hours,
-            avgHours: s.avg_hours_per_session
+            this.setData({
+              summary: summary ? {
+                days: summary.total_days || 0,
+                sessions: summary.total_sessions || 0,
+                hours: summary.total_hours || 0,
+                avgHours: summary.avg_hours_per_session || 0
+              } : { days: 0, sessions: 0, hours: 0, avgHours: 0 },
+              streams,
+              empty: !summary && streams.length === 0
+            })
+          } else {
+            console.error('加载直播数据失败', res.data)
+            this.setData({
+              empty: true,
+              summary: { days: 0, sessions: 0, hours: 0, avgHours: 0 },
+              streams: []
+            })
           }
-        })
-      }
-
-      // Get stream records for current month (type != 'monthly_summary')
-      const allRes = await db.collection('live_streams')
-        .where({ year: year, month: month })
-        .orderBy('stream_date', 'desc')
-        .get()
-
-      if (allRes.data && allRes.data.length > 0) {
-        const streams = allRes.data
-          .filter(s => s.type !== 'monthly_summary')
-          .map(s => ({
-            ...s,
-            dateDisplay: s.stream_date ? s.stream_date.slice(5) : s.stream_date,
-            durationDisplay: this.formatDuration(s.duration || 0)
-          }))
-        this.setData({ streams })
-      }
-
-      if (!summaryRes.data || summaryRes.data.length === 0) {
-        if (!this.data.streams.length) {
-          this.setData({ empty: true })
+        },
+        fail: (err) => {
+          console.error('请求失败:', err)
+        },
+        complete: () => {
+          this.setData({ loading: false })
+          resolve()
         }
-      }
-    } catch (err) {
-      console.error('加载直播数据失败:', err)
-    } finally {
-      this.setData({ loading: false })
+      })
+    })
+  },
+
+  prevMonth() {
+    let { year, month } = this.data
+    if (month === 1) {
+      year--
+      month = 12
+    } else {
+      month--
     }
+    this.loadData(year, month)
+  },
+
+  nextMonth() {
+    let { year, month } = this.data
+    if (month === 12) {
+      year++
+      month = 1
+    } else {
+      month++
+    }
+    this.loadData(year, month)
   },
 
   formatDuration(seconds) {

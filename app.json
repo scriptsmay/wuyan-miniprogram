@@ -19,10 +19,14 @@
       {
         "pagePath": "pages/index/index",
         "text": "数据",
+        "iconPath": "images/tab_data.png",
+        "selectedIconPath": "images/tab_data_active.png"
       },
       {
         "pagePath": "pages/calendar/calendar",
-        "text": "直播"
+        "text": "直播",
+        "iconPath": "images/tab_live.png",
+        "selectedIconPath": "images/tab_live_active.png"
       }
     ]
   },

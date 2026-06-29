@@ -1,4 +1,18 @@
 <view class="container">
+  <!-- 月份切换栏 -->
+  <view class="month-nav">
+    <view class="nav-btn" bindtap="prevMonth">
+      <text class="nav-arrow">◀</text>
+    </view>
+    <view class="nav-title">
+      <text wx:if="{{!loading}}">{{currentMonth}}</text>
+      <text wx:else class="nav-loading">加载中...</text>
+    </view>
+    <view class="nav-btn" bindtap="nextMonth">
+      <text class="nav-arrow">▶</text>
+    </view>
+  </view>
+
   <!-- 加载中 -->
   <view wx:if="{{loading}}" class="empty-state">加载中...</view>
 
@@ -9,7 +23,6 @@
   <view wx:else>
     <!-- 月度统计卡片 -->
     <view class="card summary-card">
-      <view class="month-title">{{currentMonth}} 直播概览</view>
       <view class="summary-grid">
         <view class="summary-item">
           <text class="summary-val">{{summary.days}}</text>
