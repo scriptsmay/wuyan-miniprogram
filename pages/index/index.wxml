@@ -75,7 +75,7 @@
 
     <!-- 直播预告入口 -->
     <view class="card live-card" bindtap="goCalendar">
-      <view class="card-title">直播日历</view>
+      <view class="live-card-title">本月直播</view>
       <view wx:if="{{liveSummary.loaded}}">
         <view class="live-stats">
           <view class="live-stat">

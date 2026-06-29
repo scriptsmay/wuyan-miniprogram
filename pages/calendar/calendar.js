@@ -7,6 +7,7 @@ Page({
     year: 0,
     month: 0,
     currentMonth: '',
+    isCurrentMonth: false,
     summary: { days: 0, sessions: 0, hours: 0, avgHours: 0 },
     streams: []
   },
@@ -22,10 +23,14 @@ Page({
   },
 
   loadData(year, month) {
+    const now = new Date()
+    const isCurrent = year === now.getFullYear() && month === (now.getMonth() + 1)
+
     this.setData({
       loading: true,
       year,
       month,
+      isCurrentMonth: isCurrent,
       currentMonth: `${year}年${month}月`
     })
 
@@ -79,23 +84,15 @@ Page({
 
   prevMonth() {
     let { year, month } = this.data
-    if (month === 1) {
-      year--
-      month = 12
-    } else {
-      month--
-    }
+    if (month === 1) { year--; month = 12 }
+    else { month-- }
     this.loadData(year, month)
   },
 
   nextMonth() {
     let { year, month } = this.data
-    if (month === 12) {
-      year++
-      month = 1
-    } else {
-      month++
-    }
+    if (month === 12) { year++; month = 1 }
+    else { month++ }
     this.loadData(year, month)
   },
 

@@ -29,6 +29,11 @@
   color: #e74c3c;
 }
 
+.nav-btn-placeholder {
+  opacity: 0;
+  pointer-events: none;
+}
+
 .nav-title {
   font-size: 34rpx;
   font-weight: 700;

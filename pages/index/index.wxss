@@ -148,12 +148,23 @@
   color: #fff;
 }
 
-.live-card .card-title {
+.live-card-title {
+  font-size: 30rpx;
+  font-weight: 600;
   color: #fff;
+  margin-bottom: 20rpx;
+  display: flex;
+  align-items: center;
 }
 
-.live-card .card-title::before {
+.live-card-title::before {
+  content: '';
+  display: inline-block;
+  width: 6rpx;
+  height: 28rpx;
   background: #f39c12;
+  border-radius: 3rpx;
+  margin-right: 12rpx;
 }
 
 .live-stats {

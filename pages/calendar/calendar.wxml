@@ -8,9 +8,10 @@
       <text wx:if="{{!loading}}">{{currentMonth}}</text>
       <text wx:else class="nav-loading">加载中...</text>
     </view>
-    <view class="nav-btn" bindtap="nextMonth">
+    <view class="nav-btn" bindtap="nextMonth" wx:if="{{!isCurrentMonth}}">
       <text class="nav-arrow">▶</text>
     </view>
+    <view class="nav-btn nav-btn-placeholder" wx:else></view>
   </view>
 
   <!-- 加载中 -->
